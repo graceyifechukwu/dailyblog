@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <%- include('partials/header', { title: pageTitle }) %>
+
+    <main class="page-shell">
+      <section class="hero">
+        <p class="eyebrow">Capstone Project Blog</p>
+        <h1>Write, edit, and manage posts in a clean, responsive layout.</h1>
+        <p class="hero-copy">
+          This blog stores posts in memory, so it is ideal for learning the full request-response flow without a database.
+        </p>
+      </section>
+
+      <section class="card form-card">
+        <div class="section-heading">
+          <h2>Create a Post</h2>
+          <p>Publish a new entry with a title and body text.</p>
+        </div>
+
+        <form class="post-form" action="/posts" method="POST">
+          <label>
+            <span>Title</span>
+            <input type="text" name="title" placeholder="Enter post title" required />
+          </label>
+
+          <label>
+            <span>Content</span>
+            <textarea name="content" rows="6" placeholder="Write your post here..." required></textarea>
+          </label>
+
+          <button type="submit" class="button button-primary">Publish Post</button>
+        </form>
+      </section>
+
+      <section class="posts-section">
+        <div class="section-heading">
+          <h2>All Posts</h2>
+          <p><%= posts.length %> post<%= posts.length === 1 ? '' : 's' %> available right now.</p>
+        </div>
+
+        <% if (posts.length > 0) { %>
+          <div class="posts-grid">
+            <% posts.forEach((post) => { %>
+              <article class="card post-card">
+                <div class="post-meta">
+                  <span><%= post.createdAt %></span>
+                  <span class="post-id">#<%= post.id %></span>
+                </div>
+                <h3><%= post.title %></h3>
+                <p><%= post.content %></p>
+
+                <div class="post-actions">
+                  <a class="button button-secondary" href="/posts/<%= post.id %>/edit">Edit</a>
+                  <form action="/posts/<%= post.id %>/delete" method="POST">
+                    <button type="submit" class="button button-danger">Delete</button>
+                  </form>
+                </div>
+              </article>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="card empty-state">
+            <h3>No posts yet</h3>
+            <p>Use the form above to create the first entry on your blog.</p>
+          </div>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>
