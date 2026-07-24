@@ -12,7 +12,7 @@
     <main class="page-shell">
       <section class="hero">
         <p class="eyebrow">Capstone Project Blog</p>
-        <h1>Write, edit, and manage posts in a clean, responsive layout.</h1>
+        <h1>Create and manage posts in a clean, responsive layout.</h1>
         <p class="hero-copy">
           This blog stores posts in memory, so it is ideal for learning the full request-response flow without a database.
         </p>
@@ -53,15 +53,10 @@
                   <span><%= post.createdAt %></span>
                   <span class="post-id">#<%= post.id %></span>
                 </div>
-                <h3><%= post.title %></h3>
+                <h3><a class="post-title-link" href="/posts/<%= post.id %>"><%= post.title %></a></h3>
                 <p><%= post.content %></p>
 
-                <div class="post-actions">
-                  <a class="button button-secondary" href="/posts/<%= post.id %>/edit">Edit</a>
-                  <form action="/posts/<%= post.id %>/delete" method="POST">
-                    <button type="submit" class="button button-danger">Delete</button>
-                  </form>
-                </div>
+                <a class="button button-secondary" href="/posts/<%= post.id %>">Read article</a>
               </article>
             <% }) %>
           </div>

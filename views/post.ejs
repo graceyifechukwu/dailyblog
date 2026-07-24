@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <%- include('partials/header', { title: 'Article' }) %>
+
+    <main class="page-shell article-shell">
+      <article class="article-card card">
+        <div class="article-kicker">Article</div>
+        <h1 class="article-title"><%= post.title %></h1>
+
+        <div class="article-meta">
+          <span>Published <%= post.createdAt %></span>
+          <span>Post #<%= post.id %></span>
+        </div>
+
+        <div class="article-body">
+          <% post.content.split('\n').forEach((paragraph) => { %>
+            <p><%= paragraph %></p>
+          <% }) %>
+        </div>
+
+        <div class="post-actions article-actions">
+          <a class="button button-secondary" href="/">Back to posts</a>
+          <a class="button button-secondary" href="/posts/<%= post.id %>/edit">Edit</a>
+          <form action="/posts/<%= post.id %>/delete" method="POST">
+            <button type="submit" class="button button-danger">Delete</button>
+          </form>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

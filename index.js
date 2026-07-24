@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/posts', (req, res) => {
+  res.redirect('/');
+});
+
 app.get('/posts/:id/edit', (req, res) => {
   const post = posts.find((item) => item.id === req.params.id);
 
@@ -41,6 +45,19 @@ app.get('/posts/:id/edit', (req, res) => {
   res.render('edit', {
     post,
     pageTitle: `Edit ${post.title}`,
+  });
+});
+
+app.get('/posts/:id', (req, res) => {
+  const post = posts.find((item) => item.id === req.params.id);
+
+  if (!post) {
+    return res.redirect('/');
+  }
+
+  res.render('post', {
+    post,
+    pageTitle: post.title,
   });
 });
 

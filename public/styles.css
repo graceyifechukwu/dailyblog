@@ -1,15 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   color-scheme: light;
-  --bg: #f4efe6;
+  --bg: #fffdf8;
   --bg-accent: #efe2cf;
-  --card: rgba(255, 255, 254, 0.88);
+  --card: rgba(245, 245, 245, 0.88);
   --text: #1d1b16;
   --muted: #665c4f;
   --border: rgba(29, 27, 22, 0.12);
-  --primary: #1f5c4f;
-  --danger: #a33d2f;
+  --primary: #000000;
+  --danger: #ca4938;
   --shadow: 0 18px 50px rgba(58, 44, 22, 0.12);
-  --font: "Geomini", sans-serif;
+  --font-body: 'Inter-Tight', sans-serif;
+  --font-display: 'Jost', sans-serif;
 }
 
 * {
@@ -18,7 +22,7 @@
 
 body {
   margin: 0;
-  font-family: var(--font);
+  font-family: var(--font-body);
   color: var(--text);
   background:
     radial-gradient(circle at top left, rgba(31, 92, 79, 0.12), transparent 32%),
@@ -56,7 +60,7 @@ a {
   border-radius: 16px;
   background: var(--primary);
   color: #fff;
-  font: 700 1rem/1 var(--font);
+  font: 700 1rem/1 var(--font-body);
   box-shadow: var(--shadow);
 }
 
@@ -65,7 +69,7 @@ a {
 .section-heading h2,
 .hero h1,
 .post-card h3 {
-  font-family: var(--font);
+  font-family: var(--font-display);
 }
 
 .brand-text strong {
@@ -94,6 +98,7 @@ a {
   border: 1px solid var(--border);
   border-radius: 28px;
   box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -112,8 +117,10 @@ a {
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-size: clamp(4rem, 2vw, 4rem);
   line-height: 1;
+  max-width: 80ch;
+
 }
 
 .hero-copy,
@@ -188,6 +195,7 @@ a {
 
 .button,
 .button:visited {
+  max-width: fit-content;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -195,7 +203,7 @@ a {
   border: 0;
   border-radius: 999px;
   padding: 12px 18px;
-  font: 700 0.95rem/1 var(--font);
+  font: 700 0.95rem/1 var(--font-body);
   cursor: pointer;
   transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
 }
@@ -261,6 +269,14 @@ a {
   font-size: 1.35rem;
 }
 
+.post-title-link {
+  color: inherit;
+}
+
+.post-title-link:hover {
+  text-decoration: underline;
+}
+
 .post-card p {
   margin: 0;
 }
@@ -279,6 +295,57 @@ a {
 
 .empty-state {
   text-align: center;
+}
+
+.article-shell {
+  width: min(820px, calc(100% - 32px));
+}
+
+.article-card {
+  padding: clamp(24px, 4vw, 48px);
+  display: grid;
+  gap: 22px;
+}
+
+.article-kicker {
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.article-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.8rem);
+  line-height: 0.95;
+  max-width: 12ch;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-body {
+  display: grid;
+  gap: 18px;
+  font-size: 1.08rem;
+  line-height: 1.85;
+}
+
+.article-body p {
+  margin: 0;
+}
+
+.article-actions {
+  justify-content: flex-start;
 }
 
 @media (max-width: 640px) {
@@ -304,5 +371,9 @@ a {
   .post-actions .button,
   .post-actions form {
     width: 100%;
+  }
+
+  .article-title {
+    max-width: 100%;
   }
 }
